@@ -1,6 +1,6 @@
 {
   "name": "grunt-broccoli-build",
-  "description": "Runs a Broccoli build.",
+  "description": "Runs a Broccoli build via Grunt.",
   "version": "0.0.1",
   "homepage": "https://github.com/ericf/grunt-broccoli-build",
   "author": {
