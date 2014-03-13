@@ -50,3 +50,4 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 * 0.0.1: Initial release.
 * 0.0.2: Updated README docs.
+* 0.0.3: Updated keywords in package.json.
