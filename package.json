@@ -31,7 +31,7 @@
     "grunt-contrib-clean": "^0.4.0",
     "grunt-contrib-nodeunit": "^0.2.0",
     "grunt": "^0.4.3",
-    "broccoli": "^0.3.0",
+    "broccoli": "^0.4.1",
     "broccoli-static-compiler": "^0.1.1"
   },
   "peerDependencies": {
