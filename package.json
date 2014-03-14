@@ -39,9 +39,9 @@
     "broccoli": ">= 0.2.1"
   },
   "keywords": [
-    "gruntplugin",
     "broccoli",
-    "broccoli-plugin"
+    "grunt",
+    "gruntplugin"
   ],
   "dependencies": {
     "ncp": "^0.5.0"
