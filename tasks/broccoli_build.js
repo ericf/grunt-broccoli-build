@@ -13,10 +13,19 @@ module.exports = function (grunt) {
         var broccoli = require('broccoli'),
             ncp      = require('ncp');
 
+        // Deal with differences in Broccoli versions.
+        var loadBrocfile = typeof broccoli.loadBrocfile === 'function' ?
+                broccoli.loadBrocfile :
+                broccoli.helpers.loadBrocfile;
+
         var done = this.async(),
             dest = this.data.dest;
 
-        var tree    = broccoli.helpers.loadBrocfile(),
+        if (typeof dest !== 'string') {
+            grunt.fatal('Target must be configured with a `dest` dir path.');
+        }
+
+        var tree    = loadBrocfile(),
             builder = new broccoli.Builder(tree);
 
         grunt.log.write('Broccoli building to "' + dest + '"...');
