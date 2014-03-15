@@ -11,12 +11,15 @@
 module.exports = function (grunt) {
     grunt.registerMultiTask('broccoli_build', 'Runs a Broccoli build.', function () {
         var broccoli = require('broccoli'),
-            ncp      = require('ncp');
+            ncp      = require('ncp').ncp;
 
         var done = this.async(),
-            dest = this.data.dest;
+            dest = this.data.dest || 'build',
+            env  = this.data.env || 'development';
 
-        var tree    = broccoli.helpers.loadBrocfile(),
+        process.env['BROCCOLI_ENV'] = env;
+
+        var tree    = broccoli.loadBrocfile(),
             builder = new broccoli.Builder(tree);
 
         grunt.log.write('Broccoli building to "' + dest + '"...');
