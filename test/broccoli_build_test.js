@@ -30,7 +30,7 @@ exports.broccoli_build = {
   built_css: function(test) {
     test.expect(1);
 
-    var actual = grunt.file.read('build/css/main.css');
+    var actual = grunt.file.read('build_production/css/main.css');
     var expected = grunt.file.read('test/expected/css/main.css');
     test.equal(actual, expected, 'should have copied main.css to the build/ dir.');
 
