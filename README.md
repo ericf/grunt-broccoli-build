@@ -43,6 +43,24 @@ grunt.initConfig({
 });
 ```
 
+grunt-broccoli-build supports multiple build–environments using [broccoli-env](https://github.com/joliss/broccoli-env):
+
+```js
+grunt.initConfig({
+  broccoli_build: {
+    assets: {
+      // Where to stick the build files.
+      dest: 'build/',
+      env: 'development' // default
+    },
+    production: {
+      dest: 'build_production',
+      env: 'production'
+    }
+  },
+});
+```
+
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
@@ -52,3 +70,4 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 * 0.0.2: Updated README docs.
 * 0.0.3: Updated keywords in package.json.
 * 0.0.4: Fixed to work with Broccoli 0.4.x.
+* 0.0.5: Add support for multiple build environments
