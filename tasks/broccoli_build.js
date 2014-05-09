@@ -25,19 +25,24 @@ module.exports = function (grunt) {
             grunt.fatal('Target must be configured with a `dest` dir path.');
         }
 
+        if (grunt.file.isDir(dest)) {
+            throw new Error('Directory "' + dest + '" already exists.');
+        }
+
         var tree    = loadBrocfile(),
             builder = new broccoli.Builder(tree);
 
         grunt.log.write('Broccoli building to "' + dest + '"...');
 
-        builder.build().then(function (dir) {
-            if (grunt.file.isDir(dest)) {
-                throw new Error('Directory "' + dest + '" already exists.');
-            }
+        builder.build().then(function (results) {
+            // Deal with differences in Broccoli versions.
+            var dir = typeof results === 'string' ? results : results.directory;
 
             ncp(dir, dest, function (err) {
                 if (err) { throw err; }
+
                 grunt.log.ok();
+                builder.cleanup();
                 done();
             });
         }).catch(done);

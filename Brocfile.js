@@ -1,21 +1,20 @@
 'use strict';
 
-module.exports = function (broccoli) {
-    var pickFiles = require('broccoli-static-compiler');
+var mergeTrees = require('broccoli-merge-trees'),
+    pickFiles  = require('broccoli-static-compiler');
 
-    var assets = broccoli.makeTree('test/fixtures/');
+var assets = 'test/fixtures/';
 
-    var css = pickFiles(assets, {
-        srcDir : '/',
-        destDir: 'css',
-        files  : ['**/*.css']
-    });
+var css = pickFiles(assets, {
+    srcDir : '/',
+    destDir: 'css',
+    files  : ['**/*.css']
+});
 
-    var js = pickFiles(assets, {
-        srcDir : '/',
-        destDir: 'js',
-        files  : ['**/*.js']
-    });
+var js = pickFiles(assets, {
+    srcDir : '/',
+    destDir: 'js',
+    files  : ['**/*.js']
+});
 
-    return [css, js];
-};
+module.exports = mergeTrees([css, js]);
