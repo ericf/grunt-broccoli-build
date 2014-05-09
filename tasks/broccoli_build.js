@@ -19,14 +19,11 @@ module.exports = function (grunt) {
                 broccoli.helpers.loadBrocfile;
 
         var done = this.async(),
-            dest = this.data.dest,
-            env  = this.data.env || 'development';
+            dest = this.data.dest;
 
         if (typeof dest !== 'string') {
             grunt.fatal('Target must be configured with a `dest` dir path.');
         }
-
-        process.env['BROCCOLI_ENV'] = env;
 
         var tree    = loadBrocfile(),
             builder = new broccoli.Builder(tree);

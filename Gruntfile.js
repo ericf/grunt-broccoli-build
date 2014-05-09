@@ -26,17 +26,13 @@ module.exports = function(grunt) {
     // Before generating any new files, remove any previously-created files.
     clean: {
       tests: ['tmp'],
-      build: ['build', 'build_production']
+      build: ['build']
     },
 
     // Configuration to be run (and then tested).
     broccoli_build: {
-      development: {
+      assets: {
         dest: 'build/'
-      },
-      production: {
-        dest: 'build_production/',
-        env: 'production'
       }
     },
 
@@ -57,12 +53,7 @@ module.exports = function(grunt) {
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.registerTask('test', [
-    'clean',
-    'broccoli_build:development',
-    'broccoli_build:production',
-    'nodeunit'
-  ]);
+  grunt.registerTask('test', ['clean', 'broccoli_build', 'nodeunit']);
 
   // By default, lint and run all tests.
   grunt.registerTask('default', ['jshint', 'test']);
