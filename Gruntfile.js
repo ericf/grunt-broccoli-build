@@ -34,10 +34,9 @@ module.exports = function(grunt) {
       development: {
         dest: 'build/'
       },
-
       production: {
-        env : 'production',
-        dest: 'build_production/'
+        dest: 'build_production/',
+        env: 'production'
       }
     },
 
