@@ -26,22 +26,31 @@ module.exports = function (grunt) {
         }
 
         if (grunt.file.isDir(dest)) {
-            throw new Error('Directory "' + dest + '" already exists.');
+            grunt.warn('Directory "' + dest + '" already exists.');
         }
 
         var tree    = loadBrocfile(),
             builder = new broccoli.Builder(tree);
 
-        grunt.log.write('Broccoli building to "' + dest + '"...');
+        grunt.log.write('Broccoli building to "' + dest + '"');
 
         builder.build().then(function (results) {
             // Deal with differences in Broccoli versions.
             var dir = typeof results === 'string' ? results : results.directory;
 
+            var buildTime = results.totalTime;
+
             ncp(dir, dest, function (err) {
                 if (err) { throw err; }
 
-                grunt.log.ok();
+                if (buildTime) {
+                    grunt.log.writeln();
+                    grunt.log.ok('built (' + Math.floor(buildTime / 1e6) + 'ms)');
+                } else {
+                    grunt.log.write('...');
+                    grunt.log.ok();
+                }
+
                 builder.cleanup();
                 done();
             });
