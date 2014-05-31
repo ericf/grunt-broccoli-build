@@ -58,3 +58,4 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 * 0.0.4: Fixed to work with Broccoli 0.4.x.
 * 0.1.0: Added support for multiple build environments. (#3, @treppo)
 * 0.2.0: Updated to work with Broccoli 0.12.x. Removed support for multiple build environments, use `grunt-env`. (#4)
+* 0.3.0: Output Broccoli build times.
