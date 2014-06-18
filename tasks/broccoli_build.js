@@ -32,7 +32,7 @@ module.exports = function (grunt) {
         var tree    = loadBrocfile(),
             builder = new broccoli.Builder(tree);
 
-        grunt.log.write('Broccoli building to "' + dest + '"');
+        grunt.log.writeln('Broccoli building to "' + dest + '"');
 
         builder.build().then(function (results) {
             // Deal with differences in Broccoli versions.
@@ -44,11 +44,9 @@ module.exports = function (grunt) {
                 if (err) { throw err; }
 
                 if (buildTime) {
-                    grunt.log.writeln();
                     grunt.log.ok('built (' + Math.floor(buildTime / 1e6) + 'ms)');
                 } else {
-                    grunt.log.write('...');
-                    grunt.log.ok();
+                    grunt.log.ok('built');
                 }
 
                 builder.cleanup();
