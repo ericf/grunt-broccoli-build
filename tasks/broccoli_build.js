@@ -11,15 +11,21 @@
 module.exports = function (grunt) {
     grunt.registerMultiTask('broccoli_build', 'Runs a Broccoli build.', function () {
         var broccoli = require('broccoli'),
-            ncp      = require('ncp');
-
-        // Deal with differences in Broccoli versions.
-        var loadBrocfile = typeof broccoli.loadBrocfile === 'function' ?
-                broccoli.loadBrocfile :
-                broccoli.helpers.loadBrocfile;
+            ncp      = require('ncp'),
+            findup   = require('findup-sync'),
+            path     = require('path');
 
         var done = this.async(),
             dest = this.data.dest;
+
+        var loadBrocfile = function(brocfileName) {
+            var brocfile = findup(brocfileName || 'Brocfile.js', {nocase: true});
+            if (brocfile == null) { throw new Error('Brocfile.js not found'); }
+            var baseDir = path.dirname(brocfile);
+            process.chdir(baseDir);
+            var tree = require(brocfile);
+            return tree;
+        };
 
         if (typeof dest !== 'string') {
             grunt.fatal('Target must be configured with a `dest` dir path.');
@@ -29,7 +35,7 @@ module.exports = function (grunt) {
             grunt.warn('Directory "' + dest + '" already exists.');
         }
 
-        var tree    = loadBrocfile(),
+        var tree    = loadBrocfile(this.data.brocfile),
             builder = new broccoli.Builder(tree);
 
         grunt.log.writeln('Broccoli building to "' + dest + '"');
