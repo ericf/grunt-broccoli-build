@@ -40,7 +40,7 @@ module.exports = function (grunt) {
 
             var buildTime = results.totalTime;
 
-            ncp(dir, dest, function (err) {
+            ncp(dir, dest, {dereference: true}, function (err) {
                 if (err) { throw err; }
 
                 if (buildTime) {
