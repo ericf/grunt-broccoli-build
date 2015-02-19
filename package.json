@@ -27,12 +27,12 @@
     "test": "grunt test"
   },
   "devDependencies": {
-    "broccoli": "^0.12.0",
-    "broccoli-merge-trees": "^0.1.3",
-    "broccoli-static-compiler": "^0.1.1",
+    "broccoli": "^0.13.3",
+    "broccoli-merge-trees": "^0.2.1",
+    "broccoli-static-compiler": "^0.2.1",
     "grunt": "^0.4.3",
     "grunt-contrib-clean": "^0.6.0",
-    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-jshint": "^0.11.0",
     "grunt-contrib-nodeunit": "^0.4.0"
   },
   "peerDependencies": {
@@ -45,7 +45,7 @@
     "gruntplugin"
   ],
   "dependencies": {
-    "findup-sync": "^0.1.3",
-    "ncp": "^0.6.0"
+    "findup-sync": "^0.2.1",
+    "ncp": "^1.0.1"
   }
 }
