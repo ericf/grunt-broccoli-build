@@ -10,22 +10,28 @@
 
 module.exports = function (grunt) {
     grunt.registerMultiTask('broccoli_build', 'Runs a Broccoli build.', function () {
-        var broccoli = require('broccoli'),
-            ncp      = require('ncp'),
-            findup   = require('findup-sync'),
-            path     = require('path');
+        var broccoli = require('broccoli');
+        var findup   = require('findup-sync');
+        var ncp      = require('ncp');
+        var path     = require('path');
 
-        var done = this.async(),
-            dest = this.data.dest;
+        var done = this.async();
+        var dest = this.data.dest;
 
-        var loadBrocfile = function(brocfileName) {
+        // TODO: Add upstream feature request to `broccoli` to support the:
+        // `loadBrocfile([ name ])` signature so this funcationality doesn't
+        // have to be duplicated from Broccoli.
+        function loadBrocfile(brocfileName) {
             var brocfile = findup(brocfileName || 'Brocfile.js', {nocase: true});
-            if (brocfile == null) { throw new Error('Brocfile.js not found'); }
-            var baseDir = path.dirname(brocfile);
-            process.chdir(baseDir);
-            var tree = require(brocfile);
-            return tree;
-        };
+
+            if (!brocfile) {
+                throw new Error('Brocfile.js not found');
+            }
+
+            // cwd into the Brocfile's dir so its deps are loaded correclty.
+            process.chdir(path.dirname(brocfile));
+            return require(brocfile);
+        }
 
         if (typeof dest !== 'string') {
             grunt.fatal('Target must be configured with a `dest` dir path.');
@@ -35,8 +41,8 @@ module.exports = function (grunt) {
             grunt.warn('Directory "' + dest + '" already exists.');
         }
 
-        var tree    = loadBrocfile(this.data.brocfile),
-            builder = new broccoli.Builder(tree);
+        var tree    = loadBrocfile(this.data.brocfile);
+        var builder = new broccoli.Builder(tree);
 
         grunt.log.writeln('Broccoli building to "' + dest + '"');
 
