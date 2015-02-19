@@ -37,7 +37,10 @@ grunt.initConfig({
   broccoli_build: {
     assets: {
       // Where to stick the build files.
-      dest: 'build/'
+      dest: 'build/',
+
+      // Optional filename if you use something other than: `Brocfile.js`.
+      brocfile: 'Brocfile.js' // default
     }
   },
 });
@@ -60,3 +63,5 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 * 0.2.0: Updated to work with Broccoli 0.12.x. Removed support for multiple build environments, use `grunt-env`. (#4)
 * 0.3.0: Output Broccoli build times.
 * 0.3.1: More consistent logging output.
+* 0.4.0: Use `ncp` symlink `deference` option, upgrade deps.
+* 0.5.0: Add support for configurable `brocfile` filename. (#5, @lord) Upgrade deps.
