@@ -65,3 +65,4 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 * 0.3.1: More consistent logging output.
 * 0.4.0: Use `ncp` symlink `deference` option, upgrade deps.
 * 0.5.0: Add support for configurable `brocfile` filename. (#5, @lord) Upgrade deps.
+* 0.6.0: Fixed cleanup phase by waiting for Broccoli's cleanup promise to resolve.
