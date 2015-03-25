@@ -46,6 +46,6 @@
   ],
   "dependencies": {
     "findup-sync": "^0.2.1",
-    "ncp": "^1.0.1"
+    "ncp": "^2.0.0"
   }
 }

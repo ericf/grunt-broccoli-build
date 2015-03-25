@@ -19,7 +19,7 @@ module.exports = function (grunt) {
         var dest = this.data.dest;
 
         // TODO: Add upstream feature request to `broccoli` to support the:
-        // `loadBrocfile([ name ])` signature so this funcationality doesn't
+        // `loadBrocfile([ name ])` signature so this functionality doesn't
         // have to be duplicated from Broccoli.
         function loadBrocfile(brocfileName) {
             var brocfile = findup(brocfileName || 'Brocfile.js', {nocase: true});
@@ -28,7 +28,7 @@ module.exports = function (grunt) {
                 throw new Error('Brocfile.js not found');
             }
 
-            // cwd into the Brocfile's dir so its deps are loaded correclty.
+            // cwd into the Brocfile's dir so its deps are loaded correctly.
             process.chdir(path.dirname(brocfile));
             return require(brocfile);
         }
@@ -61,8 +61,7 @@ module.exports = function (grunt) {
                     grunt.log.ok('built');
                 }
 
-                builder.cleanup();
-                done();
+                builder.cleanup().then(done);
             });
         }).catch(done);
     });
